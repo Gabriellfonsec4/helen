@@ -26,10 +26,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("click", (event) => {
-  if (
-    !navigation.contains(event.target) &&
-    !menuButton.contains(event.target)
-  ) {
+  if (!navigation.contains(event.target) && !menuButton.contains(event.target)) {
     closeMenu();
   }
 });
@@ -39,17 +36,14 @@ document.getElementById("year").textContent = new Date().getFullYear();
 const revealElements = document.querySelectorAll("[data-reveal]");
 
 if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    (entries, currentObserver) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          currentObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.08 },
-  );
+  const observer = new IntersectionObserver((entries, currentObserver) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        currentObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
 
   revealElements.forEach((element) => observer.observe(element));
 } else {
